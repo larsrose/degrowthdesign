@@ -39,7 +39,7 @@ export default defineConfig({
   site: "https://thought-lite.vercel.app",
   trailingSlash: "never",
   i18n: {
-    locales: ["en", "zh-cn", "ja"],
+    locales: ["en", "zh-cn", "ja", "se"],
     defaultLocale: "en",
     routing: {
       redirectToDefaultLocale: false,

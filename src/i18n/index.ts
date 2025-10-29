@@ -4,9 +4,11 @@ import { i18n } from "astro:config/client";
 import zhCN from "./zh-cn.yaml";
 import en from "./en.yaml";
 import ja from "./ja.yaml";
+import se from "./se.yaml";
+
 
 // Translation object mapping locale codes to their respective translation data
-const translations = { "zh-cn": zhCN, en, ja };
+const translations = { "zh-cn": zhCN, en, ja, se };
 
 /**
  * Create an internationalization function for a specific language
