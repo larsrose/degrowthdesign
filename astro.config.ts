@@ -37,7 +37,7 @@ import reading from "./src/utils/remark/reading";
 // https://astro.build/config
 export default defineConfig({
   site: "https://larsrose.github.io/degrowthdesign/",
-  base: './',
+  base: '/degrowthdesign/',
   trailingSlash: "never",
   i18n: {
     locales: ["en", "zh-cn", "ja", "se"],
