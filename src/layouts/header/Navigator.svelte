@@ -171,23 +171,28 @@
 	// Control mobile menu visibility state
 	let menu: boolean = $state(false);
 	let navigator: HTMLElement | undefined = $state();
+	// --- ✅ Fix for GitHub Pages base duplication ---
+	// Detect Astro base URL ("/degrowthdesign/" on GitHub Pages, "/" locally)
+	const BASE = import.meta.env.BASE_URL;
+	const baseNoSlash = BASE.endsWith('/') ? BASE.slice(0, -1) : BASE;
 
-	// Extract path without locale prefix for language switching
-	let path: string | undefined = $derived(route.slice(`/${locale == i18n?.defaultLocale ? "" : locale}`.length) || undefined);
+	// Remove the base from the current route for correct language links
+	const pathSansBase = $derived(
+		route.startsWith(baseNoSlash)
+			? route.slice(baseNoSlash.length) || '/'
+			: route
+	);
+	// --------------------------------------------------
 
 	onMount(() => {
-		// Close mobile menu when any navigation link is clicked
 		for (const link of navigator!.getElementsByTagName("a")) {
 			link.addEventListener("click", () => (menu = false));
 		}
 
-		// Set up route tracking for page navigation with Swup integration
 		const update_route = () => (route = window.location.pathname);
 		if (window.swup) {
-			// Register route update hook if Swup is already available
 			window.swup.hooks.on("page:load", update_route);
 		} else {
-			// Wait for Swup to be enabled and then register the hook
 			document.addEventListener("swup:enable", () => window.swup?.hooks.on("page:load", update_route));
 		}
 	});
